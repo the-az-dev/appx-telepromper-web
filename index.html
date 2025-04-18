@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Appx Telepromter | Documents</title>
+</head>
+<body>
+  <div id="content">
+    <!-- Content here -->
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const docType = params.get('doc_type');
+    const os = params.get('os');
+
+    const contentDiv = document.getElementById('content');
+
+    if (!docType || !os) {
+      contentDiv.innerHTML = "<p>Помилка: відсутні необхідні параметри.</p>";
+    } else {
+      let text = '';
+
+      if (docType === 'privacy') {
+        text = (os === 'ios') ?
+          '<h1>Політика конфіденційності для iOS</h1><p>Тут текст про iOS...</p>' :
+          '<h1>Політика конфіденційності для Android</h1><p>Тут текст про Android...</p>';
+      } else if (docType === 'terms') {
+        text = (os === 'ios') ?
+          '<h1>Умови користування для iOS</h1><p>Тут текст про iOS...</p>' :
+          '<h1>Умови користування для Android</h1><p>Тут текст про Android...</p>';
+      } else {
+        text = '<p>Невідомий тип документа.</p>';
+      }
+
+      contentDiv.innerHTML = text;
+    }
+  </script>
+</body>
+</html>
